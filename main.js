@@ -45,29 +45,154 @@ console.log("Сейчас " + getTime());
 //собственная функция установки дати
 
 function showTime() {
-	var monthsArr = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", 
-	"Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"];
+  var monthsArr = [
+    "Января",
+    "Февраля",
+    "Марта",
+    "Апреля",
+    "Мая",
+    "Июня",
+    "Июля",
+    "Августа",
+    "Сентября",
+    "Октября",
+    "Ноября",
+    "Декабря",
+  ];
+
+  var daysArr = [
+    "Воскресенье",
+    "Понедельник",
+    "Вторник",
+    "Среда",
+    "Четверг",
+    "Пятница",
+    "Суббота",
+  ];
+
+  var dateObj = new Date();
+
+  var year = dateObj.getFullYear();
+  var month = dateObj.getMonth();
+  var numDay = dateObj.getDate();
+  var day = dateObj.getDay();
+  var hour = dateObj.getHours();
+  var minute = dateObj.getMinutes();
+  var second = dateObj.getSeconds();
+
+  if (minute < 10) minute = "0" + minute;
+
+  if (second < 10) second = "0" + second;
+
+  var out =
+    daysArr[day] +
+    ", " +
+    numDay +
+    " " +
+    monthsArr[month] +
+    " " +
+    year +
+    ", " +
+    hour +
+    ":" +
+    minute +
+    ":" +
+    second;
+
+  return out;
+}
+
+console.log(showTime());
+
+//   xxxxxxxxxxxxxxxxxxxxxxx
+
+// let countDown = 11;
+
+// let timer = setInterval(function () {
+//   countDown--;
+//   if (!countDown) {
+//     clearInterval(timer);
+//   }
+
+//   console.log(`Count Down: ${countDown}`);
+
+//   if (countDown === 0) {
+//     console.log("STOP");
+//   }
+// }, 1000);
+
+//* методи конверсации и форматирования дати
+
+const date2 = new Date("July 22, 2018 07:22:13");
+
+console.log(date2.toString()); // "Sun Jul 22 2018 07:22:13 GMT+0200 (Central European Summer Time)"
+console.log(date2.toUTCString()); //"Sun, 22 Jul 2018 05:22:13 GMT"
+console.log(date2.toTimeString()); //"07:22:13 GMT+0200 (Central European Summer Time)"
+console.log(date2.toDateString()); //"Sun Jul 22 2018"
+console.log(date2.toISOString()); //"2018-07-22T05:22:13.000Z" (ISO 8601 format)
+console.log(date2.toLocaleString()); //"22/07/2018, 07:22:13"
+console.log(date2.toLocaleTimeString()); //"07:22:13"
+console.log(date2.getTime()); //1532236933000
+console.log(date2.getTime()); //1532236933000
+
+console.log(date2);
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+let newOne = new Date().toDateString();
+console.log(newOne);
+
+
+let a = false;
+if(a=="0"){
+	console.log("==");
+}
+if (a==="0"){
+	console.log("===");
+}
+
+// 1) ==
+// 2) ===
+// 3) == and ===
+// 4) nothing
+
+// let promise = new Promise((res,rej)=>{
+// 	setTimeout(()=>{
+// 		console.log(`success!`);
+// 	},3000);
+// })
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+const promise = new Promise((resolve, reject) => {
+	setTimeout(() => {
+	  reject('There was an error :(');
+	}, 2000);
+  });
   
-	var daysArr = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+  /*
+   * then не выполнится так как в функции fn, внутри new Promise(fn),
+   * был вызван reject(). А catch как раз выполнится через 2 секунды
+   */
+  promise
+	.then(data => {
+	  console.log(data);
+	})
+	.catch(error => {
+	  console.log(error);
+	});
   
-	var dateObj = new Date();
-  
-	var year = dateObj.getFullYear();
-	var month = dateObj.getMonth();
-	var numDay = dateObj.getDate();
-	var day = dateObj.getDay();
-	var hour = dateObj.getHours();
-	var minute = dateObj.getMinutes();
-	var second = dateObj.getSeconds();
-  
-	if (minute < 10) minute = "0" + minute;
-  
-	if (second < 10) second = "0" + second;
-  
-	var out = daysArr[day] + ", " + numDay + " " + monthsArr[month]
-			+ " " + year + ", " + hour + ":" + minute + ":" + second;
-  
-	return out;
-  }
-  
-  console.log(showTime());
+
+	// xxxxxxxxxxxxxxxxxx
+
+	const promise1 = new Promise((resolve, reject) => {
+		setTimeout(() => {
+		  resolve('success!');
+		}, 5000);
+	  });
+	  
+	  promise1
+		.then(data => console.log(data)) // "success"
+		.catch(error => console.log(error))
+		.finally(() => console.log('finished!')); // "finished"
+	  
