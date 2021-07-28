@@ -142,13 +142,12 @@ console.log(date2);
 let newOne = new Date().toDateString();
 console.log(newOne);
 
-
 let a = false;
-if(a=="0"){
-	console.log("==");
+if (a == "0") {
+  console.log("==");
 }
-if (a==="0"){
-	console.log("===");
+if (a === "0") {
+  console.log("===");
 }
 
 // 1) ==
@@ -169,7 +168,7 @@ if (a==="0"){
 // 	  reject('There was an error :(');
 // 	}, 2000);
 //   });
-  
+
 //   /*
 //    * then не выполнится так как в функции fn, внутри new Promise(fn),
 //    * был вызван reject(). А catch как раз выполнится через 2 секунды
@@ -181,7 +180,6 @@ if (a==="0"){
 // 	.catch(error => {
 // 	  console.log(error);
 // 	});
-  
 
 // 	// xxxxxxxxxxxxxxxxxx
 
@@ -190,34 +188,32 @@ if (a==="0"){
 // 		  resolve('success!');
 // 		}, 5000);
 // 	  });
-	  
+
 // 	  promise1
 // 		.then(data => console.log(data)) // "success"
 // 		.catch(error => console.log(error))
 // 		.finally(() => console.log('finished!')); // "finished"
-	//   xxxxxxxxxxxxxxxxxx
+//   xxxxxxxxxxxxxxxxxx
 
-	const makePromise = (text, delay) => {
-		return new Promise(resolve => {
-		  setTimeout(() => resolve(text), delay);
-		});
-	  };
-	  
-	  const promiseA = makePromise('promiseA', 1000);
-	  const promiseB = makePromise('promiseB', 3000);
-	  
-	  
-	  /*
-	   * Выполнится спустя 3 секунды, когда выполнится второй промис с задержкой в 3c.
-	   * Первый выполнится через секунду и просто будет готов
-	   */
-	  Promise.all([promiseA, promiseB])
-		.then(result => console.log(result)) //["promiseA", "promiseB"]
-		.catch(err => console.log(err));
-	  
+const makePromise = (text, delay) => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(text), delay);
+  });
+};
 
-		// --------
-		/*
+const promiseA = makePromise("promiseA", 1000);
+const promiseB = makePromise("promiseB", 3000);
+
+/*
+ * Выполнится спустя 3 секунды, когда выполнится второй промис с задержкой в 3c.
+ * Первый выполнится через секунду и просто будет готов
+ */
+Promise.all([promiseA, promiseB])
+  .then((result) => console.log(result)) //["promiseA", "promiseB"]
+  .catch((err) => console.log(err));
+
+// --------
+/*
  * Выполнится спустя 1 секунду, когда выполнится самый быстрый promiseA
  * с задержкой в 1c. Второй промис promiseB будет проигнорирован
  */
@@ -227,25 +223,23 @@ if (a==="0"){
 
 // -------
 
-
-console.log('script start'); //1
+console.log("script start"); //1
 
 setTimeout(function () {
-  console.log('setTimeout'); //5
+  console.log("setTimeout"); //5
 }, 0);
 
 Promise.resolve()
   .then(function () {
-    console.log('promise1'); //3
+    console.log("promise1"); //3
   })
   .then(function () {
-    console.log('promise2');//4
+    console.log("promise2"); //4
   });
 
-console.log('script end');//2
+console.log("script end"); //2
 
+// xxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-
-
-
+// Видео гайди с Репетой
 
