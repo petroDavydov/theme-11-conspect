@@ -164,35 +164,88 @@ if (a==="0"){
 
 // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-const promise = new Promise((resolve, reject) => {
-	setTimeout(() => {
-	  reject('There was an error :(');
-	}, 2000);
+// const promise = new Promise((resolve, reject) => {
+// 	setTimeout(() => {
+// 	  reject('There was an error :(');
+// 	}, 2000);
+//   });
+  
+//   /*
+//    * then не выполнится так как в функции fn, внутри new Promise(fn),
+//    * был вызван reject(). А catch как раз выполнится через 2 секунды
+//    */
+//   promise
+// 	.then(data => {
+// 	  console.log(data);
+// 	})
+// 	.catch(error => {
+// 	  console.log(error);
+// 	});
+  
+
+// 	// xxxxxxxxxxxxxxxxxx
+
+// 	const promise1 = new Promise((resolve, reject) => {
+// 		setTimeout(() => {
+// 		  resolve('success!');
+// 		}, 5000);
+// 	  });
+	  
+// 	  promise1
+// 		.then(data => console.log(data)) // "success"
+// 		.catch(error => console.log(error))
+// 		.finally(() => console.log('finished!')); // "finished"
+	//   xxxxxxxxxxxxxxxxxx
+
+	const makePromise = (text, delay) => {
+		return new Promise(resolve => {
+		  setTimeout(() => resolve(text), delay);
+		});
+	  };
+	  
+	  const promiseA = makePromise('promiseA', 1000);
+	  const promiseB = makePromise('promiseB', 3000);
+	  
+	  
+	  /*
+	   * Выполнится спустя 3 секунды, когда выполнится второй промис с задержкой в 3c.
+	   * Первый выполнится через секунду и просто будет готов
+	   */
+	  Promise.all([promiseA, promiseB])
+		.then(result => console.log(result)) //["promiseA", "promiseB"]
+		.catch(err => console.log(err));
+	  
+
+		// --------
+		/*
+ * Выполнится спустя 1 секунду, когда выполнится самый быстрый promiseA
+ * с задержкой в 1c. Второй промис promiseB будет проигнорирован
+ */
+// Promise.race([promiseA, promiseB])
+// .then(result => console.log(result)) // "promiseA"
+// .catch(err => console.log(err));
+
+// -------
+
+
+console.log('script start'); //1
+
+setTimeout(function () {
+  console.log('setTimeout'); //5
+}, 0);
+
+Promise.resolve()
+  .then(function () {
+    console.log('promise1'); //3
+  })
+  .then(function () {
+    console.log('promise2');//4
   });
-  
-  /*
-   * then не выполнится так как в функции fn, внутри new Promise(fn),
-   * был вызван reject(). А catch как раз выполнится через 2 секунды
-   */
-  promise
-	.then(data => {
-	  console.log(data);
-	})
-	.catch(error => {
-	  console.log(error);
-	});
-  
 
-	// xxxxxxxxxxxxxxxxxx
+console.log('script end');//2
 
-	const promise1 = new Promise((resolve, reject) => {
-		setTimeout(() => {
-		  resolve('success!');
-		}, 5000);
-	  });
-	  
-	  promise1
-		.then(data => console.log(data)) // "success"
-		.catch(error => console.log(error))
-		.finally(() => console.log('finished!')); // "finished"
-	  
+
+
+
+
+
