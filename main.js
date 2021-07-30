@@ -243,3 +243,26 @@ console.log("script end"); //2
 
 // Видео гайди с Репетой
 
+// статья с видео
+
+Promise.resolve("foo")
+  .then(Promise.resolve("bar"))
+  .then(function (result) {
+    console.log(result); //foo
+  });
+
+Promise.resolve("foo")
+  .then(null) // использование null
+  .then(function (result) {
+    console.log(result);//foo
+  });
+
+//then ожидает функцию
+Promise.resolve("foo")
+  .then(function () {
+    return Promise.resolve("bar");
+  })
+  .then(function (result) {
+    console.log(result);
+  });
+//!   Запоминаем: в метод then() передаем только функции.
